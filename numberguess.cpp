@@ -5,8 +5,9 @@
 
 int main(){
 
-    int num = 0;
+    double num = 0; // declaring num a double for the first do-while input check
     int numrand;
+    bool validNum;
     int guess;
     int tries = 0;
     int numtries;
@@ -18,17 +19,21 @@ int main(){
     std::cout << "              Get ready to test your magical powers! 🧙✨🔮\n\n";
 
     do{
-        do{
+        do {
             std::cout << "\nEnter the highest number for your magical range (bigger than 0): ";
             std::cin >> num;
 
-            if(num <= 0){
-                std::cout << "Please enter only a positive number bigger than 0.";
+            if (std::cin.fail() || num <= 0 || std::floor(num) != num) {
+                std::cout << "Invalid input! Please enter a positive integer greater than 0.\n";
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            } else {
+                break;
             }
-        }
-        while(num <= 0);
+        } while (true);
 
-        numrand = (rand() % num) + 1;
+
+        numrand = static_cast<int>((rand() % static_cast<int>(num)) + 1); // changing the num datatype to int
         numtries = std::ceil(num * 0.2);
 
         do{
