@@ -4,7 +4,7 @@
 
 int main(){
 
-    int num;
+    int num = 0;
     int numrand;
     int guess;
     int tries = 0;
@@ -15,8 +15,15 @@ int main(){
     std::cout << "\n********* Welcome to my Harry Potter Number Guessing Game! *********\n";
     std::cout << "              Get ready to test your magical powers! 🧙✨🔮\n\n";
 
-    std::cout << "Enter the highest number for your magical range bigger than 1: ";
-    std::cin >> num;
+    do{
+        std::cout << "\nEnter the highest number for your magical range (bigger than 0): ";
+        std::cin >> num;
+
+        if(num <= 0){
+            std::cout << "Please enter only a positive number bigger than 0.";
+        }
+    }
+    while(num <= 0);
 
     numrand = (rand() % num) + 1;
 
@@ -34,7 +41,7 @@ int main(){
 
         }
         else{
-            std::cout << "You got it! 🎉 Guessus correctus!\n";
+            std::cout << "\n\nYou got it! 🎉 Guessus correctus!\n";
                 if(guess > numtries){
                     std::cout << "But... Not very psychic of you. You cast the right spell in " << tries << " tries... Witchery might not be your strength.";
                 }
