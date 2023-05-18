@@ -8,7 +8,7 @@ int main(){
     double num = 0; // declaring num a double for the first do-while input check
     int numrand;
     bool validNum;
-    int guess;
+    double guess;
     int tries = 0;
     int numtries;
     std::string play;
@@ -37,9 +37,19 @@ int main(){
         numtries = std::ceil(num * 0.2);
 
         do{
-            std::cout << "\nCast your guess: ";
-            std::cin >> guess;
-            tries++;
+            do{
+                std::cout << "\nCast your guess: ";
+                std::cin >> guess;
+
+                if (std::cin.fail() || guess <= 0 || std::floor(guess) != guess) {
+                    std::cout << "Invalid input! Please enter a positive integer greater than 0.\n";
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                } else {
+                    tries++;
+                    break;
+                }
+            } while (true);
 
             if(guess > numrand){
                 std::cout << "Too HIGH! Your guess soared higher than The Golden Snitch! ʚ🟡ɞ\n";
@@ -57,11 +67,20 @@ int main(){
                     else{
                         std::cout << "But... Not very psychic of you. You cast the right spell in " << tries << " tries... Witchery might not be your strength.\n\n";
                     }
-                std::cout << "Do you want to play again? (yes/no): \n";
-                std::cin >> play;
-                tries = 0;
-                break;
-                }
+                do {
+                    std::cout << "Do you want to play again? (yes/no): ";
+                    std::cin >> play;
+
+                    if (play != "yes" && play != "no") {
+                        std::cout << "Invalid input! Please enter either 'yes' or 'no'.\n";
+                        std::cin.clear();
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    } else {
+                        tries = 0;
+                        break;
+                    }
+                } while (true);
+            }
         }
 
         while(guess != numrand);
