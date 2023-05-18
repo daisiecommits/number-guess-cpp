@@ -23,6 +23,19 @@ int main(){
     std::cin >> guess;
     tries++;
 
+    do{
+        if(guess > numrand){
+            std::cout << "Too HIGH! Your guess soared higher than The Golden Snitch! ʚ🟡ɞ\n";
+        }
+        else if(guess < numrand){
+            std::cout << "Too LOW! Your guess sank lower than merpoeple in The Black Lake! 🧜‍\n";
+        }
+        else{
+            std::cout << "You got it! 🎉 Guessus correctus!\n";
+        }
+
+    }
+    while(guess != numrand);
 
     return 0;
 }
